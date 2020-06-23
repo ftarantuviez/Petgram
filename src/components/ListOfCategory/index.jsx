@@ -4,17 +4,23 @@ import { Category } from '../Category/index';
 import { categories as mockCategories } from '../../api/db.json'
 import { List, Item } from './styles';
 
+function useCategoriesData(){
+    const [categories, setCategories] = useState([])   
+
+    useEffect(() =>{
+        new Promise((resolve, reject) =>{
+            if(resolve) setCategories(mockCategories);
+            else if(reject) throw Error();
+        },[])
+    })
+
+    return { categories }
+}
+
 export const ListOfCategories = () =>{
-  const [categories, setCategories] = useState([])   
   const [showFixed, setShowFixed] = useState(false)
 
-
-  useEffect(() =>{
-      new Promise((resolve, reject) =>{
-          if(resolve) setCategories(mockCategories);
-          else if(reject) throw Error();
-      },[])
-  })
+  const { categories } = useCategoriesData()
 
   useEffect(() => {
       const onScroll = e =>{
