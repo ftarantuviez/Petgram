@@ -6,21 +6,24 @@ import { List, Item } from './styles';
 
 function useCategoriesData(){
     const [categories, setCategories] = useState([])   
+    const [loading, setLoading] = useState(false)
 
     useEffect(() =>{
+        setLoading(true)
         new Promise((resolve, reject) =>{
             if(resolve) setCategories(mockCategories);
             else if(reject) throw Error();
-        },[])
-    })
+            setLoading(false)
+        })
+        
+    }, [])
 
-    return { categories }
+    return { categories, loading }
 }
 
 export const ListOfCategories = () =>{
   const [showFixed, setShowFixed] = useState(false)
-
-  const { categories } = useCategoriesData()
+  const { categories, loading } = useCategoriesData()
 
   useEffect(() => {
       const onScroll = e =>{
@@ -36,7 +39,9 @@ export const ListOfCategories = () =>{
   const renderList = (fixed) => (
     <List fixed={fixed}>
         {
-            categories.map(category =>(
+            loading 
+            ? <Item key='Loading'> <Category/> </Item>
+            : categories.map(category =>(
                 
                 <Item key={category.id}>
                     <Category
@@ -47,7 +52,7 @@ export const ListOfCategories = () =>{
         }
     </List>
   )
-
+  if(loading) return 'Loading...'
   return(
     <>
         {renderList()}

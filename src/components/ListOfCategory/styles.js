@@ -14,7 +14,7 @@ export const List = styled.ul`
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
         left: 0;
         margin: 0 auto;
-        max-width: 600px;
+        width: 600px;
         padding: 5px;
         position: fixed;
         right: 0;
@@ -27,9 +27,6 @@ export const List = styled.ul`
 
     &::-webkit-scrollbar{
         display: none;
-    }
-    &.fixed{
-        
     }
 `
 
