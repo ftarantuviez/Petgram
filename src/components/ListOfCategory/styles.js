@@ -14,12 +14,12 @@ export const List = styled.ul`
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
         left: 0;
         margin: 0 auto;
-        width: 600px;
+        max-width: 400px;
         padding: 5px;
         position: fixed;
         right: 0;
         top: -20px;
-        transform: scale(.5);
+        transform: scale(.7);
         z-index: 1;
         ${fadeIn({ time: '.5s' })};
     
