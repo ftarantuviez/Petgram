@@ -3,15 +3,30 @@ import React from 'react';
 import { GlobalStyles } from './GlobalStyles';
 import { Logo } from './components/Logo/index';
 import { ListOfCategories } from './components/ListOfCategory/index';
-import { ListOfPhotoCards } from './components/ListOfPhotoCards/index';
+import ListOfPhotoCards  from './components/ListOfPhotoCards/index';
 
-const App = () =>(
-    <>
+import PhotoCardWithQuery from './containers/PhotoCardWithQuery'
+
+const App = () =>{
+   const urlParams = new window.URLSearchParams(window.location.search)
+   const detailId = urlParams.get('detail')
+   
+
+   return(
+   <>
         <GlobalStyles />
         <Logo />
-        <ListOfCategories />
-        <ListOfPhotoCards />
-    </>
-)
+        {
+            detailId
+            ? <PhotoCardWithQuery photoIdOnly={Number(detailId)}/>
+            : <>
+                <ListOfCategories />
+                <ListOfPhotoCards categoryFilter="all"/>
+             </>
+        }
+        
+        
+    </>)
+}
 
 export default App;
