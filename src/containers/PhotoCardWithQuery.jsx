@@ -11,9 +11,9 @@ class PhotoCardWithQuery extends React.Component{
 
         return(
             <>
-                {console.log(photoAlone)}
+                
                 {photoAlone.length === 0
-                    ? 'This photo was deleted'
+                    ? 'This is not available'
                     : <PhotoCard {...photo} />
                     
                 }

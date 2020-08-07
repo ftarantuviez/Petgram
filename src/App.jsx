@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import { GlobalStyles } from './GlobalStyles';
 import { Logo } from './components/Logo/index';
 import { ListOfCategories } from './components/ListOfCategory/index';
@@ -16,14 +17,16 @@ const App = () =>{
    <>
         <GlobalStyles />
         <Logo />
-        {
+	
+   
+       {
             detailId
-            ? <PhotoCardWithQuery photoIdOnly={Number(detailId)}/>
+            ? <PhotoCardWithQuery photoIdOnly={Number(detailId)} />
             : <>
                 <ListOfCategories />
                 <ListOfPhotoCards categoryFilter="all"/>
              </>
-        }
+	}
         
         
     </>)

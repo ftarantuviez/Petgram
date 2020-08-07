@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 
-import { ImgWrapper, Img, Button, Article } from './styles';
-import { MdFavoriteBorder, MdFavorite } from 'react-icons/md'
+import { ImgWrapper, Img, Article } from './styles';
+import { FavButton } from '../FavButton/index';
 import {useLocalStorage} from '../../hooks/useLocalStorage'
 import {useNearScreen} from '../../hooks/useNearScreen'
 
@@ -14,7 +14,17 @@ export const PhotoCard = ({id, likes = 0, src = DEFAULT_IMAGE }) =>{
     const [show, ref] = useNearScreen()
     const key = `like-${id}`
     const [liked, setLiked] = useLocalStorage(key, false)
-    const Icon = liked ? MdFavorite : MdFavoriteBorder;
+    const [likesState, setLikesState] = useState(likes)
+    
+
+    const handleFavClick = () => {
+        setLiked(!liked);
+        if(liked){
+            setLikesState(likesState - 1)
+        } else{
+            setLikesState(likesState + 1)
+        }
+    }
 
     return (
         
@@ -27,10 +37,14 @@ export const PhotoCard = ({id, likes = 0, src = DEFAULT_IMAGE }) =>{
                         </ImgWrapper>
                     </a>
 
-                    <Button onClick={() => setLiked(!liked)}>
-                        <Icon /> {likes} likes!
-                    </Button>
-                </>
+                    <FavButton 
+                        liked={liked} 
+                        likes={likesState} 
+                        onClick={handleFavClick} 
+                    
+                    />
+                    
+                    </>
             }
             
 
